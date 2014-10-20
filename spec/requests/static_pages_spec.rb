@@ -2,80 +2,44 @@ require 'spec_helper'
 # gem "minitest"
 # require 'minitest/autorun'
 
-describe User do
-	before do
-		@user = User.new(name:"Example User", email:"user@Example.com")
-	end
+# describe User do
+# 	before do
+# 		@user = User.new(name:"Example User", email:"user@Example.com")
+# 	end
 
-	subject {@user}
+# 	subject {@user}
 
-	it {should respond_to(:name)}
-	it {should respond_to(:email)}
-	it {should respond_to(:password_digest)}
-end
+# 	it {should respond_to(:name)}
+# 	it {should respond_to(:email)}
+# 	it {should respond_to(:password_digest)}
+# end
 
 describe "Static pages" do
-	let(:base_title) { "Ruby on Rails Tutorial Sample App" }
+	# let(:base_title) { "Ruby on Rails Tutorial Sample App" }
+	subject { page }
 	describe "Home page" do
-
-		it "should have the content 'Sample App'" do
-			visit '/'
-			expect(page).to have_content('Sample App')
-		end
-	
-
-		it "should have the title 'Home'" do
-			visit '/'
-			expect(page).to have_title("#{base_title}")
-		end
-
-		it "should not have a custom pate title '" do
-			visit '/'
-			expect(page).not_to have_title("| Home")
-		end
-
+		before {visit root_path}
+		it {should have_content ('Sample App')}
+		it { should have_title(full_title('')) }
+		it { should_not have_title('| Home') }
 	end
 
 	describe "Help page" do
-
-		it "should have the content 'Help'" do
-			visit '/help'
-			expect(page).to have_content('Help')
-		end
-
-		it "should have the title 'Help'" do
-			visit '/help'
-			expect(page).to have_title("#{base_title} | Help")
-		end
-
+		before {visit help_path}
+		it { should have_content('Help') }
+		it { should have_title(full_title('Help')) }
 	end
 
 	describe "About page" do
-
-		it "should have the content 'About Us'" do
-			visit '/about'
-			expect(page).to have_content('About Us')
-		end
-
-		it "should have the title 'About Us'" do
-			visit '/about'
-			expect(page).to have_title("#{base_title} | About Us")
-		end
-
+		before {visit about_path}
+		it { should have_content('About') }
+		it { should have_title(full_title('About Us')) }
 	end
 
 	describe "Contact" do
-
-		it "should have the content 'Contact'" do
-			visit '/contact'
-			expect(page).to have_content('Contact')
-		end
-
-		it "should have the title 'Contact'" do
-			visit '/contact'
-			expect(page).to have_title("#{base_title} | Contact")
-		end
-
+		before {visit contact_path}
+		it { should have_content('Contact') }
+		it { should have_title(full_title('Contact')) }
 	end
 
 end
