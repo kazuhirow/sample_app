@@ -2,6 +2,18 @@ require 'spec_helper'
 # gem "minitest"
 # require 'minitest/autorun'
 
+describe User do
+	before do
+		@user = User.new(name:"Example User", email:"user@Example.com")
+	end
+
+	subject {@user}
+
+	it {should respond_to(:name)}
+	it {should respond_to(:email)}
+	it {should respond_to(:password_digest)}
+end
+
 describe "Static pages" do
 	let(:base_title) { "Ruby on Rails Tutorial Sample App" }
 	describe "Home page" do
